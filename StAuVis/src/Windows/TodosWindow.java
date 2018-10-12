@@ -119,11 +119,13 @@ public class TodosWindow extends JFrame {
     if (buttonSpeichern == null) {
       buttonSpeichern = new JButton("Speichern");
 
+      // Speichern Aktion
       buttonSpeichern.addActionListener(new ActionListener() {
 
         @Override
         public void actionPerformed(ActionEvent e) {
 
+          // Wenn Update
           if (updateBool) {
             try {
               Todos.getDao().updateTodo(textpaneWas.getText(), textfieldBiswann.getText(), updateId);
@@ -132,7 +134,9 @@ public class TodosWindow extends JFrame {
             } catch (SQLException e1) {
               e1.printStackTrace();
             }
-          } else {
+          }
+          // Wenn neu
+          else {
             try {
               Todos.getDao().newTodo(textpaneWas.getText(), textfieldBiswann.getText());
               setVisible(false);

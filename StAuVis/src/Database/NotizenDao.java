@@ -44,25 +44,6 @@ public class NotizenDao {
   }
 
   /**
-   * Zieht alle Spaltennamen aus der Datenbank.
-   * @return eine ArrayList mit allen Spaltennamen.
-   * @throws SQLException
-   */
-  /*public ArrayList<String> findUeberschrift() throws SQLException {
-  
-    PreparedStatement ps = DataBase.getInstance()
-        .prepareStatement("select COLUMN_NAME from information_schema.columns where table_name = 'notizen'");
-    ResultSet rs = ps.executeQuery();
-    ArrayList<String> ueberschriftenList = new ArrayList<>();
-    while (rs.next()) {
-  
-      ueberschriftenList.add(rs.getString("column_name"));
-    }
-  
-    return ueberschriftenList;
-  }*/
-
-  /**
    * Zieht die Notiz mit der id.
    * @param id ist für die Identifizierung der Notiz.
    * @return eine ArrayList mit der gesuchten Notiz.

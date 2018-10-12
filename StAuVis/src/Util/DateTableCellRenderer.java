@@ -30,6 +30,9 @@ public class DateTableCellRenderer extends DefaultTableCellRenderer {
   /*##############################################################################################################################################################*/
 
   // Methoden
+  /**
+   * Formattiert die Dates aus der Datenbank mit einem Formatter.
+   */
   @Override
   public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
     super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);

@@ -162,19 +162,23 @@ public class TermineWindow extends JFrame {
 
       buttonSpeichern.addActionListener(new ActionListener() {
 
+        // Speichern Aktion
         @Override
         public void actionPerformed(ActionEvent e) {
 
+          // Setzt einen Zeit String aus dem Timepicker zusammen
           String uhrzeit = new String(timepanelWann.getCalendar().get(Calendar.HOUR_OF_DAY) + ":" + timepanelWann.getCalendar().get(Calendar.MINUTE));
 
+          // Wenn Update
           if (updateBool) {
-
             try {
               Termine.getDao().updateTermin(new Date(datechooserWas.getDate().getTime()), uhrzeit, textpaneWas.getText(), textfieldWo.getText(), updateId);
             } catch (SQLException e1) {
               e1.printStackTrace();
             }
-          } else {
+          }
+          // Wenn neu
+          else {
             try {
               Termine.getDao().newTermin(new Date(datechooserWas.getDate().getTime()), uhrzeit, textpaneWas.getText(), textfieldWo.getText());
             } catch (SQLException e1) {
@@ -193,6 +197,7 @@ public class TermineWindow extends JFrame {
     if (buttonAbbrechen == null) {
       buttonAbbrechen = new JButton("Abbrechen");
 
+      // Abbrechen Aktion
       buttonAbbrechen.addActionListener(new ActionListener() {
 
         @Override

@@ -23,6 +23,11 @@ import Entities.Hausaufgaben;
 
 @SuppressWarnings("serial")
 public class HausaufgabenWindow extends JFrame {
+
+  /*##############################################################################################################################################################*/
+  /*##############################################################################################################################################################*/
+
+  // JElements
   private JLabel labelInhalt;
   private JTextPane textpaneInhalt;
   private JLabel labelBiswann;
@@ -32,22 +37,24 @@ public class HausaufgabenWindow extends JFrame {
   private JPanel panelFach;
   private JLabel labelFach;
   private JButton buttonFach;
+  private JComboBox<Faecher> comboboxFach;
+  private JLabel labelErledigt;
+  private JComboBox<String> comboboxErledigt;
+  String[] erledigtArray;
+  private JDateChooser dateChooser;
 
   // Update
   boolean updateBool;
   int updateId;
 
-  private JComboBox<Faecher> comboboxFach;
-  private JLabel labelErledigt;
-  private JComboBox<String> comboboxErledigt;
+  /*##############################################################################################################################################################*/
+  /*##############################################################################################################################################################*/
 
-  String[] erledigtArray;
-  private JDateChooser dateChooser;
-
+  // Konstruktor
   public HausaufgabenWindow() throws SQLException {
 
+    // ComboBox füllen
     getComboboxArray();
-
     erledigtArray = new String[] { "Nein", "Ja" };
 
     GridBagLayout gridBagLayout = new GridBagLayout();
@@ -121,6 +128,10 @@ public class HausaufgabenWindow extends JFrame {
     getContentPane().add(getPanelButtons(), gbc_panelButtons);
   }
 
+  /*##############################################################################################################################################################*/
+  /*##############################################################################################################################################################*/
+
+  // GETTERS und SETTERS
   public JLabel getLabelInhalt() {
     if (labelInhalt == null) {
       labelInhalt = new JLabel("Inhalt");
@@ -155,11 +166,13 @@ public class HausaufgabenWindow extends JFrame {
     if (buttonSpeichern == null) {
       buttonSpeichern = new JButton("Speichern");
 
+      // Speichern Aktion
       buttonSpeichern.addActionListener(new ActionListener() {
 
         @Override
         public void actionPerformed(ActionEvent e) {
 
+          // Wenn Update
           if (updateBool) {
             boolean boolErledigt;
             if (comboboxErledigt.getSelectedItem().equals("Ja")) {
@@ -174,7 +187,9 @@ public class HausaufgabenWindow extends JFrame {
             } catch (SQLException e1) {
               e1.printStackTrace();
             }
-          } else {
+          }
+          // Wenn neu
+          else {
             boolean boolErledigt;
             if (comboboxErledigt.getSelectedItem().equals("Ja")) {
               boolErledigt = true;
@@ -199,6 +214,7 @@ public class HausaufgabenWindow extends JFrame {
     if (buttonAbbrechen == null) {
       buttonAbbrechen = new JButton("Abbrechen");
 
+      // Abbrechen Aktion
       buttonAbbrechen.addActionListener(new ActionListener() {
 
         @Override
@@ -232,6 +248,7 @@ public class HausaufgabenWindow extends JFrame {
 
       buttonFach.addActionListener(new ActionListener() {
 
+        // Neues Fach Aktion
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -247,16 +264,6 @@ public class HausaufgabenWindow extends JFrame {
       });
     }
     return buttonFach;
-  }
-
-  private void refreshComboBoxFaecher() throws SQLException {
-    getComboboxFach().removeAllItems();
-    Faecher.getDao().findAll().forEach(fach -> getComboboxFach().addItem(fach));
-
-    /*
-    for (Faecher fach : Faecher.getDao().findAll()) {
-      getComboboxFach().addItem(fach);
-    }*/
   }
 
   public boolean isUpdateBool() {
@@ -286,12 +293,6 @@ public class HausaufgabenWindow extends JFrame {
     return comboboxFach;
   }
 
-  private Faecher[] getComboboxArray() throws SQLException {
-
-    List<Faecher> faecherList = Faecher.getDao().findAll();
-    return faecherList.toArray(new Faecher[faecherList.size()]);
-  }
-
   public JLabel getLabelErledigt() {
     if (labelErledigt == null) {
       labelErledigt = new JLabel("Erledigt ?");
@@ -311,5 +312,29 @@ public class HausaufgabenWindow extends JFrame {
       dateChooser = new JDateChooser();
     }
     return dateChooser;
+  }
+
+  /*##############################################################################################################################################################*/
+  /*##############################################################################################################################################################*/
+
+  // Hilfsmethoden
+  /**
+   * Fächer für die Combobox.
+   * @return ein Faecher Array.
+   * @throws SQLException
+   */
+  private Faecher[] getComboboxArray() throws SQLException {
+
+    List<Faecher> faecherList = Faecher.getDao().findAll();
+    return faecherList.toArray(new Faecher[faecherList.size()]);
+  }
+
+  /**
+   * Refresht das Faecher Array.
+   * @throws SQLException
+   */
+  private void refreshComboBoxFaecher() throws SQLException {
+    getComboboxFach().removeAllItems();
+    Faecher.getDao().findAll().forEach(fach -> getComboboxFach().addItem(fach));
   }
 }

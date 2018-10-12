@@ -22,6 +22,11 @@ import Util.FaecherAbstractTableModel;
 
 @SuppressWarnings("serial")
 public class FachWindow extends JDialog {
+
+  /*##############################################################################################################################################################*/
+  /*##############################################################################################################################################################*/
+
+  // JElements
   private JLabel labelFaecher;
   private JScrollPane scrollpane;
   private JLabel labelNeuesFach;
@@ -33,7 +38,13 @@ public class FachWindow extends JDialog {
   private JTable table;
   private FaecherAbstractTableModel tablemodel;
 
+  /*##############################################################################################################################################################*/
+  /*##############################################################################################################################################################*/
+
+  // Konstruktor
   public FachWindow(JFrame owner) throws SQLException {
+
+    // Modaler super Aufruf
     super(owner, true);
 
     GridBagLayout gridBagLayout = new GridBagLayout();
@@ -76,6 +87,10 @@ public class FachWindow extends JDialog {
     getContentPane().add(getPanelButtons(), gbc_panelButtons);
   }
 
+  /*##############################################################################################################################################################*/
+  /*##############################################################################################################################################################*/
+
+  // GETTERS und SETTERS
   public JLabel getLabelFaecher() {
     if (labelFaecher == null) {
       labelFaecher = new JLabel("F\u00E4cher");
@@ -120,6 +135,7 @@ public class FachWindow extends JDialog {
     if (buttonSpeichern == null) {
       buttonSpeichern = new JButton("Speichern");
 
+      // Speicher Aktion
       buttonSpeichern.addActionListener(new ActionListener() {
 
         @Override
@@ -141,13 +157,14 @@ public class FachWindow extends JDialog {
     if (buttonLoeschen == null) {
       buttonLoeschen = new JButton("L\u00F6schen");
 
+      // Löschen Aktion
       buttonLoeschen.addActionListener(new ActionListener() {
 
         @Override
         public void actionPerformed(ActionEvent e) {
 
           try {
-            Faecher.getDao().deleteFach((tablemodel.getAlleDaten().get(table.getSelectedRow()).getId()));
+            Faecher.getDao().deleteFach((tablemodel.getAlleDaten().get(table.convertRowIndexToModel(table.getSelectedRow())).getId()));
             refreshTable();
           } catch (SQLException e1) {
             e1.printStackTrace();
@@ -162,6 +179,7 @@ public class FachWindow extends JDialog {
     if (buttonFertig == null) {
       buttonFertig = new JButton("Fertig");
 
+      // Fertig Aktion
       buttonFertig.addActionListener(new ActionListener() {
 
         @Override
@@ -179,16 +197,23 @@ public class FachWindow extends JDialog {
     if (table == null) {
       table = new JTable();
 
+      // Setzen des Models
       tablemodel = new FaecherAbstractTableModel();
       table.setModel(tablemodel);
 
+      // Single Selection aktivieren
       table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+      // Automatische Sortierung aktivieren
       table.setAutoCreateRowSorter(true);
     }
     return table;
   }
 
+  /*##############################################################################################################################################################*/
+  /*##############################################################################################################################################################*/
+
+  // Hilfsmethoden
   /**
    * Lädt die Tabelle neu.
    * @throws SQLException

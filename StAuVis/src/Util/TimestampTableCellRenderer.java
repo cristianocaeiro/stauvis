@@ -31,6 +31,9 @@ public class TimestampTableCellRenderer extends DefaultTableCellRenderer {
   /*##############################################################################################################################################################*/
 
   // Methoden
+  /**
+   * Formattiert die Timestamps aus der Datenbank in ein leserliches Format mithilfe eines Formatters.
+   */
   @Override
   public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
     super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);

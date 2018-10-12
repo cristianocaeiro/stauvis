@@ -101,6 +101,7 @@ public class MainWindow extends JFrame {
   // Konstruktoren
   public MainWindow() throws SQLException {
 
+    // Window Einstellungen
     addWindowListeners();
     changeLookAndFeelDesign();
 
@@ -638,56 +639,7 @@ public class MainWindow extends JFrame {
     if (tableHausaufgaben == null) {
       tableHausaufgaben = new JTable();
 
-      tablemodelHausaufgaben = new HausaufgabenAbstractTableModel();
-      tableHausaufgaben.setModel(tablemodelHausaufgaben);
-
-      // Beschränkung auf eine Markierung
-      tableHausaufgaben.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-      // Sortierung aktivieren
-      tableHausaufgaben.setAutoCreateRowSorter(true);
-
-      // Date Spalte formattieren
-      DateTableCellRenderer dcr = new DateTableCellRenderer();
-      tableHausaufgaben.getColumnModel().getColumn(2).setCellRenderer(dcr);
-      BooleanTableCellRenderer bcr = new BooleanTableCellRenderer();
-      tableHausaufgaben.getColumnModel().getColumn(3).setCellRenderer(bcr);
-
-      // Spaltenbreite anpassen
-      tableHausaufgaben.getColumnModel().getColumn(0).setMaxWidth(75);
-      tableHausaufgaben.getColumnModel().getColumn(0).setMinWidth(75);
-      tableHausaufgaben.getColumnModel().getColumn(2).setMaxWidth(75);
-      tableHausaufgaben.getColumnModel().getColumn(2).setMinWidth(75);
-      tableHausaufgaben.getColumnModel().getColumn(3).setMaxWidth(75);
-      tableHausaufgaben.getColumnModel().getColumn(3).setMinWidth(75);
-
-      tableHausaufgaben.addMouseListener(new MouseAdapter() {
-        public void mouseClicked(MouseEvent e) {
-          if (e.getClickCount() == 2) {
-            Hausaufgaben hausaufgabe = tablemodelHausaufgaben.getAlleDaten().get(tableHausaufgaben.convertRowIndexToModel(tableHausaufgaben.getSelectedRow()));
-            HausaufgabenWindow hausaufgabeWindow;
-            try {
-              hausaufgabeWindow = new HausaufgabenWindow();
-              hausaufgabeWindow.getComboboxFach().getModel().setSelectedItem(hausaufgabe.getFach());
-              hausaufgabeWindow.getTextpaneInhalt().setText(hausaufgabe.getInhalt());
-              hausaufgabeWindow.getDateChooser().setDate(hausaufgabe.getBiswann());
-              String erledigt = new String();
-              if (hausaufgabe.isErledigt()) {
-                erledigt = "Ja";
-              } else {
-                erledigt = "Nein";
-              }
-              hausaufgabeWindow.getComboboxErledigt().setSelectedItem(erledigt);
-              hausaufgabeWindow.setUpdateBool(true);
-              hausaufgabeWindow.setUpdateId(hausaufgabe.getId());
-              hausaufgabeWindow.setBounds(getScreenCenter().width / 2 - 200, getScreenCenter().height / 2 - 175, 400, 350);
-              hausaufgabeWindow.setVisible(true);
-            } catch (SQLException e1) {
-              e1.printStackTrace();
-            }
-          }
-        }
-      });
+      setupTableHausaufgaben();
     }
     return tableHausaufgaben;
   }
@@ -827,6 +779,10 @@ public class MainWindow extends JFrame {
     tableZeiterfassung.getColumnModel().getColumn(2).setMinWidth(70);
   }
 
+  /**
+   * Setup für die Termine Tabelle.
+   * @throws SQLException
+   */
   private void setupTableTermine() throws SQLException {
     tablemodelTermine = new TermineAbstractTableModel();
     tableTermine.setModel(tablemodelTermine);
@@ -861,6 +817,64 @@ public class MainWindow extends JFrame {
           termineWindow.setUpdateId(termin.getId());
           termineWindow.setBounds(getScreenCenter().width / 2 - 200, getScreenCenter().height / 2 - 175, 400, 350);
           termineWindow.setVisible(true);
+        }
+      }
+    });
+  }
+
+  /**
+   * Setup für die Hausaufgaben Tabelle
+   * @throws SQLException
+   */
+  private void setupTableHausaufgaben() throws SQLException {
+    tablemodelHausaufgaben = new HausaufgabenAbstractTableModel();
+    tableHausaufgaben.setModel(tablemodelHausaufgaben);
+
+    // Beschränkung auf eine Markierung
+    tableHausaufgaben.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+    // Sortierung aktivieren
+    tableHausaufgaben.setAutoCreateRowSorter(true);
+
+    // Date Spalte formattieren
+    DateTableCellRenderer dcr = new DateTableCellRenderer();
+    tableHausaufgaben.getColumnModel().getColumn(2).setCellRenderer(dcr);
+    BooleanTableCellRenderer bcr = new BooleanTableCellRenderer();
+    tableHausaufgaben.getColumnModel().getColumn(3).setCellRenderer(bcr);
+
+    // Spaltenbreite anpassen
+    tableHausaufgaben.getColumnModel().getColumn(0).setMaxWidth(75);
+    tableHausaufgaben.getColumnModel().getColumn(0).setMinWidth(75);
+    tableHausaufgaben.getColumnModel().getColumn(2).setMaxWidth(75);
+    tableHausaufgaben.getColumnModel().getColumn(2).setMinWidth(75);
+    tableHausaufgaben.getColumnModel().getColumn(3).setMaxWidth(75);
+    tableHausaufgaben.getColumnModel().getColumn(3).setMinWidth(75);
+
+    // Doppelklick auf Zeile der Tabelle Aktion zum Updaten
+    tableHausaufgaben.addMouseListener(new MouseAdapter() {
+      public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+          Hausaufgaben hausaufgabe = tablemodelHausaufgaben.getAlleDaten().get(tableHausaufgaben.convertRowIndexToModel(tableHausaufgaben.getSelectedRow()));
+          HausaufgabenWindow hausaufgabeWindow;
+          try {
+            hausaufgabeWindow = new HausaufgabenWindow();
+            hausaufgabeWindow.getComboboxFach().getModel().setSelectedItem(hausaufgabe.getFach());
+            hausaufgabeWindow.getTextpaneInhalt().setText(hausaufgabe.getInhalt());
+            hausaufgabeWindow.getDateChooser().setDate(hausaufgabe.getBiswann());
+            String erledigt = new String();
+            if (hausaufgabe.isErledigt()) {
+              erledigt = "Ja";
+            } else {
+              erledigt = "Nein";
+            }
+            hausaufgabeWindow.getComboboxErledigt().setSelectedItem(erledigt);
+            hausaufgabeWindow.setUpdateBool(true);
+            hausaufgabeWindow.setUpdateId(hausaufgabe.getId());
+            hausaufgabeWindow.setBounds(getScreenCenter().width / 2 - 200, getScreenCenter().height / 2 - 175, 400, 350);
+            hausaufgabeWindow.setVisible(true);
+          } catch (SQLException e1) {
+            e1.printStackTrace();
+          }
         }
       }
     });

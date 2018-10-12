@@ -93,17 +93,22 @@ public class NotizenWindow extends JFrame {
     if (buttonSpeichern == null) {
       buttonSpeichern = new JButton("Speichern");
 
+      // Speichern Aktion
       buttonSpeichern.addActionListener(new ActionListener() {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
+          // Wenn Update
           if (updateBool) {
             try {
               Notizen.getDao().updateNotiz(textpane.getText(), updateId);
             } catch (SQLException e1) {
               e1.printStackTrace();
             }
-          } else {
+          }
+          // Wenn neu
+          else {
             try {
               Notizen.getDao().newNotiz(textpane.getText());
             } catch (SQLException e1) {
@@ -122,6 +127,7 @@ public class NotizenWindow extends JFrame {
     if (buttonAbbrechen == null) {
       buttonAbbrechen = new JButton("Abbrechen");
 
+      // Abbrechen Aktion
       buttonAbbrechen.addActionListener(new ActionListener() {
 
         @Override
