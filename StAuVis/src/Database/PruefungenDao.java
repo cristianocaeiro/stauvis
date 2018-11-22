@@ -133,7 +133,7 @@ public class PruefungenDao {
    * @param id der zu löschenden Prüfung.
    * @throws SQLException
    */
-  public void deleteTodo(int id) throws SQLException {
+  public void deletePruefung(int id) throws SQLException {
 
     PreparedStatement ps = DataBase.getInstance().prepareStatement("delete from pruefungen where id = ?");
     ps.setInt(1, id);

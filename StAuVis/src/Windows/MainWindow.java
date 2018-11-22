@@ -25,11 +25,14 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import com.toedter.calendar.JDateChooser;
 
 import Entities.Hausaufgaben;
 import Entities.Notizen;
+import Entities.Pruefungen;
 import Entities.Termine;
 import Entities.Todos;
 import Entities.Zeiterfassung;
@@ -37,6 +40,7 @@ import Util.BooleanTableCellRenderer;
 import Util.DateTableCellRenderer;
 import Util.HausaufgabenAbstractTableModel;
 import Util.NotizenAbstractTableModel;
+import Util.PruefungenAbstractTableModel;
 import Util.TermineAbstractTableModel;
 import Util.TimestampTableCellRenderer;
 import Util.TodosAbstractTableModel;
@@ -94,6 +98,9 @@ public class MainWindow extends JFrame {
   private JScrollPane scrollpaneHausaufgaben;
   private JTable tableHausaufgaben;
   private HausaufgabenAbstractTableModel tablemodelHausaufgaben;
+  private JScrollPane scrollpanePruefungen;
+  private JTable tablePruefungen;
+  private PruefungenAbstractTableModel tablemodelPruefungen;
 
   /*##############################################################################################################################################################*/
   /*##############################################################################################################################################################*/
@@ -373,6 +380,34 @@ public class MainWindow extends JFrame {
       tabbedpane.addTab("Hausaufgaben", null, getScrollpaneHausaufgaben(), null);
       tabbedpane.addTab("Zeiterfassung", null, getScrollpaneZeiterfassung(), null);
       tabbedpane.addTab("Notizen", null, getScrollpaneNotizen(), null);
+      tabbedpane.addTab("Prüfungen", null, getScrollpanePruefungen(), null);
+
+      tabbedpane.addChangeListener(new ChangeListener() {
+
+        @Override
+        public void stateChanged(ChangeEvent e) {
+          if (tabbedpane.getSelectedIndex() == 0) {
+
+            getButton_5().setEnabled(true);
+            getButton_3().setEnabled(true);
+          }
+          if (tabbedpane.getSelectedIndex() == 1) {
+
+            getButton_5().setEnabled(false);
+            getButton_3().setEnabled(false);
+          }
+          if (tabbedpane.getSelectedIndex() == 2) {
+
+            getButton_5().setEnabled(true);
+            getButton_3().setEnabled(true);
+          }
+          if (tabbedpane.getSelectedIndex() == 3) {
+
+            getButton_5().setEnabled(true);
+            getButton_3().setEnabled(true);
+          }
+        }
+      });
     }
     return tabbedpane;
   }
@@ -668,6 +703,12 @@ public class MainWindow extends JFrame {
 
     tablemodelHausaufgaben.getHausaufgabenModelData();
     tablemodelHausaufgaben.fireTableDataChanged();
+
+    tablemodelPruefungen.getPruefungenModelData();
+    tablemodelPruefungen.fireTableDataChanged();
+
+    tablemodelTermine.getTermineModelData();
+    tablemodelTermine.fireTableDataChanged();
   }
 
   /**
@@ -771,8 +812,8 @@ public class MainWindow extends JFrame {
     tableZeiterfassung.getColumnModel().getColumn(0).setCellRenderer(dcr);
 
     // Spaltenbreite anpassen
-    tableZeiterfassung.getColumnModel().getColumn(0).setMaxWidth(100);
-    tableZeiterfassung.getColumnModel().getColumn(0).setMinWidth(100);
+    tableZeiterfassung.getColumnModel().getColumn(0).setMaxWidth(80);
+    tableZeiterfassung.getColumnModel().getColumn(0).setMinWidth(80);
     tableZeiterfassung.getColumnModel().getColumn(1).setMaxWidth(70);
     tableZeiterfassung.getColumnModel().getColumn(1).setMinWidth(70);
     tableZeiterfassung.getColumnModel().getColumn(2).setMaxWidth(70);
@@ -843,10 +884,10 @@ public class MainWindow extends JFrame {
     tableHausaufgaben.getColumnModel().getColumn(3).setCellRenderer(bcr);
 
     // Spaltenbreite anpassen
-    tableHausaufgaben.getColumnModel().getColumn(0).setMaxWidth(75);
-    tableHausaufgaben.getColumnModel().getColumn(0).setMinWidth(75);
-    tableHausaufgaben.getColumnModel().getColumn(2).setMaxWidth(75);
-    tableHausaufgaben.getColumnModel().getColumn(2).setMinWidth(75);
+    tableHausaufgaben.getColumnModel().getColumn(0).setMaxWidth(100);
+    tableHausaufgaben.getColumnModel().getColumn(0).setMinWidth(100);
+    tableHausaufgaben.getColumnModel().getColumn(2).setMaxWidth(80);
+    tableHausaufgaben.getColumnModel().getColumn(2).setMinWidth(80);
     tableHausaufgaben.getColumnModel().getColumn(3).setMaxWidth(75);
     tableHausaufgaben.getColumnModel().getColumn(3).setMinWidth(75);
 
@@ -998,6 +1039,24 @@ public class MainWindow extends JFrame {
             e1.printStackTrace();
           }
         }
+        if (tabbedpane.getSelectedIndex() == 3) {
+
+          Pruefungen pruefung = tablemodelPruefungen.getAlleDaten().get(tablePruefungen.convertRowIndexToModel(tablePruefungen.getSelectedRow()));
+          PruefungenWindow pruefungWindow = new PruefungenWindow();
+          try {
+            pruefungWindow.getComboboxFach().getModel().setSelectedItem(pruefung.getFach());
+          } catch (SQLException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+          }
+          pruefungWindow.getTextfieldBezeichnung().setText((pruefung.getBezeichnung()));
+          pruefungWindow.getDatechooser().setDate(pruefung.getDatum());
+          pruefungWindow.getTextfieldNote().setText("" + pruefung.getNote());
+          pruefungWindow.setUpdateBool(true);
+          pruefungWindow.setUpdateId(pruefung.getId());
+          pruefungWindow.setBounds(getScreenCenter().width / 2 - 310, getScreenCenter().height / 2 - 225, 620, 450);
+          pruefungWindow.setVisible(true);
+        }
       }
 
       // TO DO
@@ -1040,6 +1099,14 @@ public class MainWindow extends JFrame {
             e1.printStackTrace();
           }
         }
+        if (tabbedpane.getSelectedIndex() == 3) {
+          try {
+            Pruefungen.getDao().deletePruefung((tablemodelPruefungen.getAlleDaten().get(tablePruefungen.convertRowIndexToModel(tablePruefungen.getSelectedRow())).getId()));
+            refreshTables();
+          } catch (SQLException e1) {
+            e1.printStackTrace();
+          }
+        }
       }
     });
   }
@@ -1054,6 +1121,12 @@ public class MainWindow extends JFrame {
       @Override
       public void actionPerformed(ActionEvent e) {
 
+        if (tabbedpane.getSelectedIndex() == 3) {
+          PruefungenWindow pruefungenWindow = new PruefungenWindow();
+          pruefungenWindow.setUpdateBool(false);
+          pruefungenWindow.setBounds(getScreenCenter().width / 2 - 148, getScreenCenter().height / 2 - 140, 296, 280);
+          pruefungenWindow.setVisible(true);
+        }
         if (tabbedpane.getSelectedIndex() == 2) {
           NotizenWindow notizenWindow = new NotizenWindow();
           notizenWindow.setUpdateBool(false);
@@ -1169,6 +1242,76 @@ public class MainWindow extends JFrame {
           refreshTables();
         } catch (SQLException e1) {
           e1.printStackTrace();
+        }
+      }
+    });
+  }
+
+  public JScrollPane getScrollpanePruefungen() throws SQLException {
+    if (scrollpanePruefungen == null) {
+      scrollpanePruefungen = new JScrollPane();
+      scrollpanePruefungen.setViewportView(getTablePruefungen());
+    }
+    return scrollpanePruefungen;
+  }
+
+  public JTable getTablePruefungen() throws SQLException {
+    if (tablePruefungen == null) {
+      tablePruefungen = new JTable() {
+
+        // Bearbeitung der Zellen deaktivieren
+        @Override
+        public boolean isCellEditable(int row, int column) {
+          return false;
+        }
+      };
+      setupTablePruefungen();
+    }
+    return tablePruefungen;
+  }
+
+  private void setupTablePruefungen() throws SQLException {
+
+    // Tabelle zum Start mit Daten füllen
+    tablemodelPruefungen = new PruefungenAbstractTableModel();
+    tablePruefungen.setModel(tablemodelPruefungen);
+
+    // Beschränkung auf eine Markierung
+    tablePruefungen.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+    // Sortierung aktivieren
+    tablePruefungen.setAutoCreateRowSorter(true);
+
+    // Datum formatieren
+    DateTableCellRenderer dateTableCellRenderer = new DateTableCellRenderer();
+    tablePruefungen.getColumnModel().getColumn(2).setCellRenderer(dateTableCellRenderer);
+    // Spaltenbreite anpassen
+    tablePruefungen.getColumnModel().getColumn(0).setMaxWidth(100);
+    tablePruefungen.getColumnModel().getColumn(0).setMinWidth(100);
+    tablePruefungen.getColumnModel().getColumn(2).setMaxWidth(80);
+    tablePruefungen.getColumnModel().getColumn(2).setMinWidth(80);
+    tablePruefungen.getColumnModel().getColumn(3).setMaxWidth(40);
+    tablePruefungen.getColumnModel().getColumn(3).setMinWidth(40);
+
+    // Doppelklick Aktion in der Tabelle; öffnen des Eintrags
+    tablePruefungen.addMouseListener(new MouseAdapter() {
+      public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+          Pruefungen pruefung = tablemodelPruefungen.getAlleDaten().get(tablePruefungen.convertRowIndexToModel(tablePruefungen.getSelectedRow()));
+          PruefungenWindow pruefungWindow = new PruefungenWindow();
+          try {
+            pruefungWindow.getComboboxFach().getModel().setSelectedItem(pruefung.getFach());
+          } catch (SQLException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+          }
+          pruefungWindow.getTextfieldBezeichnung().setText((pruefung.getBezeichnung()));
+          pruefungWindow.getDatechooser().setDate(pruefung.getDatum());
+          pruefungWindow.getTextfieldNote().setText("" + pruefung.getNote());
+          pruefungWindow.setUpdateBool(true);
+          pruefungWindow.setUpdateId(pruefung.getId());
+          pruefungWindow.setBounds(getScreenCenter().width / 2 - 310, getScreenCenter().height / 2 - 225, 620, 450);
+          pruefungWindow.setVisible(true);
         }
       }
     });
