@@ -1,5 +1,6 @@
 package Windows;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
 import Entities.Notizen;
+import Util.UtilColors;
 
 @SuppressWarnings("serial")
 public class NotizenWindow extends JFrame {
@@ -68,6 +70,7 @@ public class NotizenWindow extends JFrame {
   public JLabel getLabelDatum() {
     if (labelDatum == null) {
       labelDatum = new JLabel("Notiz");
+      labelDatum.setForeground(Color.WHITE);
     }
     return labelDatum;
   }
@@ -83,6 +86,7 @@ public class NotizenWindow extends JFrame {
   public JPanel getPanel() {
     if (panel == null) {
       panel = new JPanel();
+      panel.setBackground(UtilColors.getPanelColor());
       panel.add(getButtonSpeichern());
       panel.add(getButtonAbbrechen());
     }
@@ -92,6 +96,7 @@ public class NotizenWindow extends JFrame {
   public JButton getButtonSpeichern() {
     if (buttonSpeichern == null) {
       buttonSpeichern = new JButton("Speichern");
+      buttonSpeichern.setBackground(UtilColors.getButtonColor());
 
       // Speichern Aktion
       buttonSpeichern.addActionListener(new ActionListener() {
@@ -126,6 +131,7 @@ public class NotizenWindow extends JFrame {
   public JButton getButtonAbbrechen() {
     if (buttonAbbrechen == null) {
       buttonAbbrechen = new JButton("Abbrechen");
+      buttonAbbrechen.setBackground(UtilColors.getButtonColor());
 
       // Abbrechen Aktion
       buttonAbbrechen.addActionListener(new ActionListener() {

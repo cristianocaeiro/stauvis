@@ -942,6 +942,7 @@ public class MainWindow extends JFrame {
             hausaufgabeWindow.setUpdateId(hausaufgabe.getId());
             hausaufgabeWindow.setBounds(getX() + (getWidth() / 2) - 200, getY() + (getY() / 2), 400, 350);
             //hausaufgabeWindow.setBounds(getScreenCenter().width / 2 - 200, getScreenCenter().height / 2 - 175, 400, 350);
+            hausaufgabeWindow.getContentPane().setBackground(UtilColors.getWindowColor());
             hausaufgabeWindow.setVisible(true);
           } catch (SQLException e1) {
             e1.printStackTrace();
@@ -1067,6 +1068,7 @@ public class MainWindow extends JFrame {
             hausaufgabeWindow.setUpdateBool(true);
             hausaufgabeWindow.setUpdateId(hausaufgabe.getId());
             hausaufgabeWindow.setBounds(getScreenCenter().width / 2 - 200, getScreenCenter().height / 2 - 175, 400, 350);
+            hausaufgabeWindow.getContentPane().setBackground(UtilColors.getWindowColor());
             hausaufgabeWindow.setVisible(true);
           } catch (SQLException e1) {
             e1.printStackTrace();
@@ -1176,6 +1178,7 @@ public class MainWindow extends JFrame {
             HausaufgabenWindow hausaufgabenWindow = new HausaufgabenWindow();
             hausaufgabenWindow.setUpdateBool(false);
             hausaufgabenWindow.setBounds(getScreenCenter().width / 2 - 200, getScreenCenter().height / 2 - 200, 400, 400);
+            hausaufgabenWindow.getContentPane().setBackground(UtilColors.getWindowColor());
             hausaufgabenWindow.setVisible(true);
           } catch (SQLException e1) {
             e1.printStackTrace();

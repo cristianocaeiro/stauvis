@@ -1,5 +1,6 @@
 package Windows;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -136,6 +137,7 @@ public class HausaufgabenWindow extends JFrame {
   public JLabel getLabelInhalt() {
     if (labelInhalt == null) {
       labelInhalt = new JLabel("Inhalt");
+      labelInhalt.setForeground(Color.WHITE);
     }
     return labelInhalt;
   }
@@ -150,6 +152,7 @@ public class HausaufgabenWindow extends JFrame {
   public JLabel getLabelBiswann() {
     if (labelBiswann == null) {
       labelBiswann = new JLabel("Bis wann ?");
+      labelBiswann.setForeground(Color.WHITE);
     }
     return labelBiswann;
   }
@@ -157,6 +160,7 @@ public class HausaufgabenWindow extends JFrame {
   public JPanel getPanelButtons() {
     if (panelButtons == null) {
       panelButtons = new JPanel();
+      panelButtons.setBackground(UtilColors.getPanelColor());
       panelButtons.add(getButtonSpeichern());
       panelButtons.add(getButtonAbbrechen());
     }
@@ -166,6 +170,7 @@ public class HausaufgabenWindow extends JFrame {
   public JButton getButtonSpeichern() {
     if (buttonSpeichern == null) {
       buttonSpeichern = new JButton("Speichern");
+      buttonSpeichern.setBackground(UtilColors.getButtonColor());
 
       // Speichern Aktion
       buttonSpeichern.addActionListener(new ActionListener() {
@@ -214,6 +219,7 @@ public class HausaufgabenWindow extends JFrame {
   public JButton getButtonAbbrechen() {
     if (buttonAbbrechen == null) {
       buttonAbbrechen = new JButton("Abbrechen");
+      buttonAbbrechen.setBackground(UtilColors.getButtonColor());
 
       // Abbrechen Aktion
       buttonAbbrechen.addActionListener(new ActionListener() {
@@ -231,6 +237,7 @@ public class HausaufgabenWindow extends JFrame {
   public JPanel getPanelFach() {
     if (panelFach == null) {
       panelFach = new JPanel();
+      panelFach.setBackground(UtilColors.getWindowColor());
       panelFach.add(getLabelFach());
     }
     return panelFach;
@@ -239,6 +246,7 @@ public class HausaufgabenWindow extends JFrame {
   public JLabel getLabelFach() {
     if (labelFach == null) {
       labelFach = new JLabel("Fach");
+      labelFach.setForeground(Color.WHITE);
     }
     return labelFach;
   }
@@ -246,6 +254,7 @@ public class HausaufgabenWindow extends JFrame {
   public JButton getButtonFach() {
     if (buttonFach == null) {
       buttonFach = new JButton("Neues Fach");
+      buttonFach.setBackground(UtilColors.getButtonColor());
 
       buttonFach.addActionListener(new ActionListener() {
 
@@ -298,6 +307,7 @@ public class HausaufgabenWindow extends JFrame {
   public JLabel getLabelErledigt() {
     if (labelErledigt == null) {
       labelErledigt = new JLabel("Erledigt ?");
+      labelErledigt.setForeground(Color.WHITE);
     }
     return labelErledigt;
   }
