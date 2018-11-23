@@ -1,5 +1,6 @@
 package Util;
 
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JTable;
@@ -19,13 +20,12 @@ public class BooleanTableCellRenderer extends DefaultTableCellRenderer {
     super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
     if (value instanceof Boolean) {
-
       if ((boolean) value == true) {
-
         setText("Ja");
+        setBackground(Color.GREEN);
       } else {
-
         setText("Nein");
+        setBackground(Color.RED);
       }
     }
     return this;

@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.SQLException;
 
+import Util.UtilColors;
 import Windows.MainWindow;
 
 public class Main {
@@ -13,6 +14,7 @@ public class Main {
     // Startet das MainWindow
     MainWindow mainWindow = new MainWindow();
     mainWindow.setBounds(getScreenCenter().width / 4, getScreenCenter().height / 4, 1200, 800);
+    mainWindow.getContentPane().setBackground(UtilColors.getWindowColor());
     mainWindow.setVisible(true);
   }
 

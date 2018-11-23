@@ -1,5 +1,6 @@
 package Windows;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -20,6 +21,7 @@ import com.lavantech.gui.comp.TimePanel;
 import com.toedter.calendar.JDateChooser;
 
 import Entities.Termine;
+import Util.UtilColors;
 
 @SuppressWarnings("serial")
 public class TermineWindow extends JFrame {
@@ -107,6 +109,7 @@ public class TermineWindow extends JFrame {
   public JLabel getLabelWann() {
     if (labelWann == null) {
       labelWann = new JLabel("Wann ?");
+      labelWann.setForeground(Color.WHITE);
     }
     return labelWann;
   }
@@ -121,6 +124,7 @@ public class TermineWindow extends JFrame {
   public JLabel getLabelWas() {
     if (labelWas == null) {
       labelWas = new JLabel("Was ?");
+      labelWas.setForeground(Color.WHITE);
     }
     return labelWas;
   }
@@ -135,6 +139,7 @@ public class TermineWindow extends JFrame {
   public JLabel getLabelWo() {
     if (labelWo == null) {
       labelWo = new JLabel("Wo ?");
+      labelWo.setForeground(Color.WHITE);
     }
     return labelWo;
   }
@@ -150,6 +155,7 @@ public class TermineWindow extends JFrame {
   public JPanel getPanelButtons() {
     if (panelButtons == null) {
       panelButtons = new JPanel();
+      panelButtons.setBackground(UtilColors.getPanelColor());
       panelButtons.add(getButtonSpeichern());
       panelButtons.add(getButtonAbbrechen());
     }
@@ -159,6 +165,7 @@ public class TermineWindow extends JFrame {
   public JButton getButtonSpeichern() {
     if (buttonSpeichern == null) {
       buttonSpeichern = new JButton("Speichern");
+      buttonSpeichern.setBackground(UtilColors.getButtonColor());
 
       buttonSpeichern.addActionListener(new ActionListener() {
 
@@ -196,6 +203,7 @@ public class TermineWindow extends JFrame {
   public JButton getButtonAbbrechen() {
     if (buttonAbbrechen == null) {
       buttonAbbrechen = new JButton("Abbrechen");
+      buttonAbbrechen.setBackground(UtilColors.getButtonColor());
 
       // Abbrechen Aktion
       buttonAbbrechen.addActionListener(new ActionListener() {

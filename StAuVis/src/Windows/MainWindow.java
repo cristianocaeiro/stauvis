@@ -1,5 +1,6 @@
 package Windows;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -44,6 +45,7 @@ import Util.PruefungenAbstractTableModel;
 import Util.TermineAbstractTableModel;
 import Util.TimestampTableCellRenderer;
 import Util.TodosAbstractTableModel;
+import Util.UtilColors;
 import Util.ZeiterfassungAbstractTableModel;
 
 @SuppressWarnings("serial")
@@ -110,7 +112,7 @@ public class MainWindow extends JFrame {
 
     // Window Einstellungen
     addWindowListeners();
-    changeLookAndFeelDesign();
+    //changeLookAndFeelDesign();
 
     // Positionierung der Elemente im Haupt-Gridlayout
     GridBagLayout gridBagLayout = new GridBagLayout();
@@ -275,6 +277,7 @@ public class MainWindow extends JFrame {
   public JLabel getLabelZeiterfassungTitel() {
     if (labelZeiterfassungTitel == null) {
       labelZeiterfassungTitel = new JLabel("Zeiterfassung");
+      labelZeiterfassungTitel.setForeground(Color.WHITE);
     }
     return labelZeiterfassungTitel;
   }
@@ -282,6 +285,7 @@ public class MainWindow extends JFrame {
   public JLabel getLabelZeiterfassungDatum() {
     if (labelZeiterfassungDatum == null) {
       labelZeiterfassungDatum = new JLabel("Datum");
+      labelZeiterfassungDatum.setForeground(Color.WHITE);
     }
     return labelZeiterfassungDatum;
   }
@@ -289,6 +293,7 @@ public class MainWindow extends JFrame {
   public JLabel getLabelZeiterfassungStundenzahl() {
     if (labelZeiterfassungStundenzahl == null) {
       labelZeiterfassungStundenzahl = new JLabel("Stundenanzahl");
+      labelZeiterfassungStundenzahl.setForeground(Color.WHITE);
     }
     return labelZeiterfassungStundenzahl;
   }
@@ -296,6 +301,7 @@ public class MainWindow extends JFrame {
   public JLabel getLabelZeiterfassungPause() {
     if (labelZeiterfassungPause == null) {
       labelZeiterfassungPause = new JLabel("Pause");
+      labelZeiterfassungPause.setForeground(Color.WHITE);
     }
     return labelZeiterfassungPause;
   }
@@ -335,6 +341,7 @@ public class MainWindow extends JFrame {
   public JLabel getLabelTermineTitel() {
     if (labelTermineTitel == null) {
       labelTermineTitel = new JLabel("Termine");
+      labelTermineTitel.setForeground(Color.WHITE);
     }
     return labelTermineTitel;
   }
@@ -453,6 +460,7 @@ public class MainWindow extends JFrame {
   public JPanel getPanelButtons() {
     if (panelButtons == null) {
       panelButtons = new JPanel();
+      panelButtons.setBackground(UtilColors.getPanelColor());
       panelButtons.add(getButton_5());
       panelButtons.add(getButton_3());
       panelButtons.add(getButton_4());
@@ -487,6 +495,7 @@ public class MainWindow extends JFrame {
   public JPanel getPanelSuchen() {
     if (panelSuchen == null) {
       panelSuchen = new JPanel();
+      panelSuchen.setBackground(UtilColors.getPanelColor());
       panelSuchen.add(getLabelSuchen());
       panelSuchen.add(getTextField_2());
     }
@@ -496,6 +505,7 @@ public class MainWindow extends JFrame {
   public JLabel getLabelSuchen() {
     if (labelSuchen == null) {
       labelSuchen = new JLabel("Suchen:");
+      labelSuchen.setForeground(Color.WHITE);
     }
     return labelSuchen;
   }
@@ -511,6 +521,7 @@ public class MainWindow extends JFrame {
   public JLabel getLabelTodos() {
     if (labelTodos == null) {
       labelTodos = new JLabel("To-Do's");
+      labelTodos.setForeground(Color.WHITE);
     }
     return labelTodos;
   }
@@ -518,6 +529,7 @@ public class MainWindow extends JFrame {
   public JPanel getPanelTodos() throws SQLException {
     if (panelTodos == null) {
       panelTodos = new JPanel();
+      panelTodos.setBackground(UtilColors.getPanelColor());
       GridBagLayout gbl_panelTodos = new GridBagLayout();
       gbl_panelTodos.columnWidths = new int[] { 0, 0 };
       gbl_panelTodos.rowHeights = new int[] { 0, 0, 0, 0 };
@@ -589,6 +601,7 @@ public class MainWindow extends JFrame {
   public JLabel getLabelCredits() {
     if (labelCredits == null) {
       labelCredits = new JLabel("@CristianoCaeiro - Dream-Team");
+      labelCredits.setForeground(Color.WHITE);
     }
     return labelCredits;
   }
@@ -596,6 +609,7 @@ public class MainWindow extends JFrame {
   public JLabel getLabelTitel() {
     if (labelTitel == null) {
       labelTitel = new JLabel("StAuVis");
+      labelTitel.setForeground(Color.WHITE);
     }
     return labelTitel;
   }
@@ -603,6 +617,7 @@ public class MainWindow extends JFrame {
   public JLabel getLabelUhrzeit() {
     if (labelUhrzeit == null) {
       labelUhrzeit = new JLabel("Uhrzeit");
+      labelUhrzeit.setForeground(Color.WHITE);
     }
     return labelUhrzeit;
   }
@@ -610,6 +625,7 @@ public class MainWindow extends JFrame {
   public JLabel getLabelDatum() {
     if (labelDatum == null) {
       labelDatum = new JLabel("Datum");
+      labelDatum.setForeground(Color.WHITE);
     }
     return labelDatum;
   }
@@ -642,6 +658,7 @@ public class MainWindow extends JFrame {
   public JLabel getLabelZeiterfassungKommentar() {
     if (labelZeiterfassungKommentar == null) {
       labelZeiterfassungKommentar = new JLabel("Kommentar");
+      labelZeiterfassungKommentar.setForeground(Color.WHITE);
     }
     return labelZeiterfassungKommentar;
   }
@@ -720,6 +737,8 @@ public class MainWindow extends JFrame {
     tablemodelNotizen = new NotizenAbstractTableModel();
     tableNotizen.setModel(tablemodelNotizen);
 
+    tableNotizen.setBackground(UtilColors.getTableColor());
+
     // Beschränkung auf eine Markierung
     tableNotizen.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -743,6 +762,7 @@ public class MainWindow extends JFrame {
           notizenWindow.setUpdateBool(true);
           notizenWindow.setUpdateId(notiz.getId());
           notizenWindow.setBounds(getScreenCenter().width / 2 - 310, getScreenCenter().height / 2 - 225, 620, 450);
+          notizenWindow.getContentPane().setBackground(UtilColors.getWindowColor());
           notizenWindow.setVisible(true);
         }
       }
@@ -757,6 +777,7 @@ public class MainWindow extends JFrame {
     // Tabelle mit Daten füllen
     tablemodelTodos = new TodosAbstractTableModel();
     tableTodos.setModel(tablemodelTodos);
+    tableTodos.setBackground(UtilColors.getTableColor());
 
     // Beschränkung auf eine Markierung
     tableTodos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -785,6 +806,7 @@ public class MainWindow extends JFrame {
           todosWindow.setUpdateBool(true);
           todosWindow.setUpdateId(todo.getId());
           todosWindow.setBounds(getScreenCenter().width / 2 - 175, getScreenCenter().height / 2 - 225, 350, 450);
+          todosWindow.getContentPane().setBackground(UtilColors.getWindowColor());
           todosWindow.setVisible(true);
         }
       }
@@ -800,6 +822,8 @@ public class MainWindow extends JFrame {
     // Tabelle mit Daten füllen
     tablemodelZeiterfassung = new ZeiterfassungAbstractTableModel();
     tableZeiterfassung.setModel(tablemodelZeiterfassung);
+
+    tableZeiterfassung.setBackground(UtilColors.getTableColor());
 
     // Beschränkung auf eine Markierung
     tableZeiterfassung.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -827,6 +851,8 @@ public class MainWindow extends JFrame {
   private void setupTableTermine() throws SQLException {
     tablemodelTermine = new TermineAbstractTableModel();
     tableTermine.setModel(tablemodelTermine);
+
+    tableTermine.setBackground(UtilColors.getTableColor());
 
     // Beschränkung auf eine Markierung
     tableTermine.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -857,6 +883,7 @@ public class MainWindow extends JFrame {
           termineWindow.setUpdateBool(true);
           termineWindow.setUpdateId(termin.getId());
           termineWindow.setBounds(getScreenCenter().width / 2 - 200, getScreenCenter().height / 2 - 175, 400, 350);
+          termineWindow.getContentPane().setBackground(UtilColors.getWindowColor());
           termineWindow.setVisible(true);
         }
       }
@@ -870,6 +897,8 @@ public class MainWindow extends JFrame {
   private void setupTableHausaufgaben() throws SQLException {
     tablemodelHausaufgaben = new HausaufgabenAbstractTableModel();
     tableHausaufgaben.setModel(tablemodelHausaufgaben);
+
+    tableHausaufgaben.setBackground(UtilColors.getTableColor());
 
     // Beschränkung auf eine Markierung
     tableHausaufgaben.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -911,7 +940,8 @@ public class MainWindow extends JFrame {
             hausaufgabeWindow.getComboboxErledigt().setSelectedItem(erledigt);
             hausaufgabeWindow.setUpdateBool(true);
             hausaufgabeWindow.setUpdateId(hausaufgabe.getId());
-            hausaufgabeWindow.setBounds(getScreenCenter().width / 2 - 200, getScreenCenter().height / 2 - 175, 400, 350);
+            hausaufgabeWindow.setBounds(getX() + (getWidth() / 2) - 200, getY() + (getY() / 2), 400, 350);
+            //hausaufgabeWindow.setBounds(getScreenCenter().width / 2 - 200, getScreenCenter().height / 2 - 175, 400, 350);
             hausaufgabeWindow.setVisible(true);
           } catch (SQLException e1) {
             e1.printStackTrace();
@@ -982,6 +1012,7 @@ public class MainWindow extends JFrame {
    * Set up des Refresh Buttons.
    */
   private void setupButtonRefresh() {
+    buttonRefresh.setBackground(UtilColors.getButtonColor());
     buttonRefresh.addActionListener(new ActionListener() {
 
       // Das neu laden der Table beim klicken auf dem Refresh Button
@@ -1001,6 +1032,7 @@ public class MainWindow extends JFrame {
    * Set up des Bearbeiten Buttons.
    */
   private void setupButtonBearbeiten() {
+    buttonBearbeiten.setBackground(UtilColors.getButtonColor());
     buttonBearbeiten.addActionListener(new ActionListener() {
 
       // Bearbeiten bzw. öffnen des Tabelleneintrags nach dem klicken des Bearbeiten Buttons
@@ -1014,6 +1046,7 @@ public class MainWindow extends JFrame {
           notizenWindow.setUpdateBool(true);
           notizenWindow.setUpdateId(notiz.getId());
           notizenWindow.setBounds(getScreenCenter().width / 2 - 310, getScreenCenter().height / 2 - 225, 620, 450);
+          notizenWindow.getContentPane().setBackground(UtilColors.getWindowColor());
           notizenWindow.setVisible(true);
         }
         if (tabbedpane.getSelectedIndex() == 0) {
@@ -1055,6 +1088,7 @@ public class MainWindow extends JFrame {
           pruefungWindow.setUpdateBool(true);
           pruefungWindow.setUpdateId(pruefung.getId());
           pruefungWindow.setBounds(getScreenCenter().width / 2 - 310, getScreenCenter().height / 2 - 225, 620, 450);
+          pruefungWindow.getContentPane().setBackground(UtilColors.getWindowColor());
           pruefungWindow.setVisible(true);
         }
       }
@@ -1067,6 +1101,7 @@ public class MainWindow extends JFrame {
    * Set up des Löschen Buttons.
    */
   private void setupButtonLoeschen() {
+    buttonLoeschen.setBackground(UtilColors.getButtonColor());
     buttonLoeschen.addActionListener(new ActionListener() {
 
       // Löschen des Tabelleneintrags beim klicken des Löschen Buttons
@@ -1115,6 +1150,7 @@ public class MainWindow extends JFrame {
    * Set up des Neu Buttons.
    */
   private void setupButtonNeu() {
+    buttonNeu.setBackground(UtilColors.getButtonColor());
     buttonNeu.addActionListener(new ActionListener() {
 
       // Neues Notizen Window beim klicken des Neu Buttons
@@ -1125,12 +1161,14 @@ public class MainWindow extends JFrame {
           PruefungenWindow pruefungenWindow = new PruefungenWindow();
           pruefungenWindow.setUpdateBool(false);
           pruefungenWindow.setBounds(getScreenCenter().width / 2 - 148, getScreenCenter().height / 2 - 140, 296, 280);
+          pruefungenWindow.getContentPane().setBackground(UtilColors.getWindowColor());
           pruefungenWindow.setVisible(true);
         }
         if (tabbedpane.getSelectedIndex() == 2) {
           NotizenWindow notizenWindow = new NotizenWindow();
           notizenWindow.setUpdateBool(false);
           notizenWindow.setBounds(getScreenCenter().width / 2 - 310, getScreenCenter().height / 2 - 225, 620, 450);
+          notizenWindow.getContentPane().setBackground(UtilColors.getWindowColor());
           notizenWindow.setVisible(true);
         }
         if (tabbedpane.getSelectedIndex() == 0) {
@@ -1151,6 +1189,7 @@ public class MainWindow extends JFrame {
    * Setup des Neues Todo Buttons.
    */
   private void setupButtonTodosNeu() {
+    buttonTodosNeu.setBackground(UtilColors.getButtonColor());
     buttonTodosNeu.addActionListener(new ActionListener() {
 
       @Override
@@ -1158,6 +1197,7 @@ public class MainWindow extends JFrame {
         TodosWindow todosWindow = new TodosWindow();
         todosWindow.setUpdateBool(false);
         todosWindow.setBounds(getScreenCenter().width / 2 - 175, getScreenCenter().height / 2 - 225, 350, 450);
+        todosWindow.getContentPane().setBackground(UtilColors.getWindowColor());
         todosWindow.setVisible(true);
       }
     });
@@ -1167,6 +1207,7 @@ public class MainWindow extends JFrame {
    * Setup des Erledigt Todo Buttons.
    */
   private void setupButtonTodosErledigt() {
+    buttonTodosErledigt.setBackground(UtilColors.getButtonColor());
     buttonTodosErledigt.addActionListener(new ActionListener() {
 
       @Override
@@ -1185,6 +1226,7 @@ public class MainWindow extends JFrame {
    * Setup des Speichern Zeiterfassungs Button.
    */
   private void setupButtonZeiterfassungSpeichern() {
+    buttonZeiterfassungSpeichern.setBackground(UtilColors.getButtonColor());
     buttonZeiterfassungSpeichern.addActionListener(new ActionListener() {
 
       @Override
@@ -1216,6 +1258,7 @@ public class MainWindow extends JFrame {
    * Setup des Plus Termine Button.
    */
   private void setupButtonTerminePlus() {
+    buttonTerminePlus.setBackground(UtilColors.getButtonColor());
     buttonTerminePlus.addActionListener(new ActionListener() {
 
       @Override
@@ -1223,6 +1266,7 @@ public class MainWindow extends JFrame {
 
         TermineWindow termineWindow = new TermineWindow();
         termineWindow.setBounds(getScreenCenter().width / 2 - 200, getScreenCenter().height / 2 - 175, 400, 350);
+        termineWindow.getContentPane().setBackground(UtilColors.getWindowColor());
         termineWindow.setVisible(true);
       }
     });
@@ -1232,6 +1276,7 @@ public class MainWindow extends JFrame {
    * Setup des Minus Termine Button.
    */
   private void setupButtonTermineMinus() {
+    buttonTermineMinus.setBackground(UtilColors.getButtonColor());
     buttonTermineMinus.addActionListener(new ActionListener() {
 
       @Override
@@ -1276,6 +1321,8 @@ public class MainWindow extends JFrame {
     tablemodelPruefungen = new PruefungenAbstractTableModel();
     tablePruefungen.setModel(tablemodelPruefungen);
 
+    tablePruefungen.setBackground(UtilColors.getTableColor());
+
     // Beschränkung auf eine Markierung
     tablePruefungen.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -1311,6 +1358,7 @@ public class MainWindow extends JFrame {
           pruefungWindow.setUpdateBool(true);
           pruefungWindow.setUpdateId(pruefung.getId());
           pruefungWindow.setBounds(getScreenCenter().width / 2 - 310, getScreenCenter().height / 2 - 225, 620, 450);
+          pruefungWindow.getContentPane().setBackground(UtilColors.getWindowColor());
           pruefungWindow.setVisible(true);
         }
       }

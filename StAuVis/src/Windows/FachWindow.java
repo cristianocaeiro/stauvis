@@ -1,5 +1,6 @@
 package Windows;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -19,6 +20,7 @@ import javax.swing.ListSelectionModel;
 
 import Entities.Faecher;
 import Util.FaecherAbstractTableModel;
+import Util.UtilColors;
 
 @SuppressWarnings("serial")
 public class FachWindow extends JDialog {
@@ -94,6 +96,7 @@ public class FachWindow extends JDialog {
   public JLabel getLabelFaecher() {
     if (labelFaecher == null) {
       labelFaecher = new JLabel("F\u00E4cher");
+      labelFaecher.setForeground(Color.WHITE);
     }
     return labelFaecher;
   }
@@ -109,6 +112,7 @@ public class FachWindow extends JDialog {
   public JLabel getLabelNeuesFach() {
     if (labelNeuesFach == null) {
       labelNeuesFach = new JLabel("Neues Fach");
+      labelNeuesFach.setForeground(Color.WHITE);
     }
     return labelNeuesFach;
   }
@@ -124,6 +128,7 @@ public class FachWindow extends JDialog {
   public JPanel getPanelButtons() {
     if (panelButtons == null) {
       panelButtons = new JPanel();
+      panelButtons.setBackground(UtilColors.getPanelColor());
       panelButtons.add(getButtonSpeichern());
       panelButtons.add(getButtonLoeschen());
       panelButtons.add(getButtonFertig());
@@ -134,6 +139,7 @@ public class FachWindow extends JDialog {
   public JButton getButtonSpeichern() {
     if (buttonSpeichern == null) {
       buttonSpeichern = new JButton("Speichern");
+      buttonSpeichern.setBackground(UtilColors.getButtonColor());
 
       // Speicher Aktion
       buttonSpeichern.addActionListener(new ActionListener() {
@@ -156,6 +162,7 @@ public class FachWindow extends JDialog {
   public JButton getButtonLoeschen() {
     if (buttonLoeschen == null) {
       buttonLoeschen = new JButton("L\u00F6schen");
+      buttonLoeschen.setBackground(UtilColors.getButtonColor());
 
       // Löschen Aktion
       buttonLoeschen.addActionListener(new ActionListener() {
@@ -178,6 +185,7 @@ public class FachWindow extends JDialog {
   public JButton getButtonFertig() {
     if (buttonFertig == null) {
       buttonFertig = new JButton("Fertig");
+      buttonFertig.setBackground(UtilColors.getButtonColor());
 
       // Fertig Aktion
       buttonFertig.addActionListener(new ActionListener() {
@@ -196,6 +204,7 @@ public class FachWindow extends JDialog {
   public JTable getTable() throws SQLException {
     if (table == null) {
       table = new JTable();
+      table.setBackground(UtilColors.getTableColor());
 
       // Setzen des Models
       tablemodel = new FaecherAbstractTableModel();

@@ -1,5 +1,6 @@
 package Windows;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -15,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import Entities.Todos;
+import Util.UtilColors;
 
 @SuppressWarnings("serial")
 public class TodosWindow extends JFrame {
@@ -80,6 +82,7 @@ public class TodosWindow extends JFrame {
   public JLabel getLabelWas() {
     if (labelWas == null) {
       labelWas = new JLabel("Was ?");
+      labelWas.setForeground(Color.WHITE);
     }
     return labelWas;
   }
@@ -94,6 +97,7 @@ public class TodosWindow extends JFrame {
   public JLabel getLabelBiswann() {
     if (labelBiswann == null) {
       labelBiswann = new JLabel("Bis wann ?");
+      labelBiswann.setForeground(Color.WHITE);
     }
     return labelBiswann;
   }
@@ -109,6 +113,7 @@ public class TodosWindow extends JFrame {
   public JPanel getPanelButtons() {
     if (panelButtons == null) {
       panelButtons = new JPanel();
+      panelButtons.setBackground(UtilColors.getPanelColor());
       panelButtons.add(getButtonSpeichern());
       panelButtons.add(getButtonAbbrechen());
     }
@@ -118,6 +123,7 @@ public class TodosWindow extends JFrame {
   public JButton getButtonSpeichern() {
     if (buttonSpeichern == null) {
       buttonSpeichern = new JButton("Speichern");
+      buttonSpeichern.setBackground(UtilColors.getButtonColor());
 
       // Speichern Aktion
       buttonSpeichern.addActionListener(new ActionListener() {
@@ -154,6 +160,7 @@ public class TodosWindow extends JFrame {
   public JButton getButtonAbbrechen() {
     if (buttonAbbrechen == null) {
       buttonAbbrechen = new JButton("Abbrechen");
+      buttonAbbrechen.setBackground(UtilColors.getButtonColor());
       buttonAbbrechen.addActionListener(new ActionListener() {
 
         // Fenster schlieﬂen wenn auf abbrechen geklickt wird

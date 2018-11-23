@@ -67,7 +67,7 @@ public class NotizenWindow extends JFrame {
   // GETTERS und SETTERS
   public JLabel getLabelDatum() {
     if (labelDatum == null) {
-      labelDatum = new JLabel("Datum");
+      labelDatum = new JLabel("Notiz");
     }
     return labelDatum;
   }

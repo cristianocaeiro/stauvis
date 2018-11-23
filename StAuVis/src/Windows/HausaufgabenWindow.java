@@ -20,6 +20,7 @@ import com.toedter.calendar.JDateChooser;
 
 import Entities.Faecher;
 import Entities.Hausaufgaben;
+import Util.UtilColors;
 
 @SuppressWarnings("serial")
 public class HausaufgabenWindow extends JFrame {
@@ -255,6 +256,7 @@ public class HausaufgabenWindow extends JFrame {
           try {
             FachWindow fachWindow = new FachWindow(HausaufgabenWindow.this);
             fachWindow.setBounds(getLocation().x + getSize().width, getLocation().y, 300, 400);
+            fachWindow.getContentPane().setBackground(UtilColors.getWindowColor());
             fachWindow.setVisible(true);
             refreshComboBoxFaecher();
           } catch (SQLException e1) {

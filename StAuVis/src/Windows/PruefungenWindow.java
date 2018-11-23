@@ -1,5 +1,6 @@
 package Windows;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -20,6 +21,7 @@ import com.toedter.calendar.JDateChooser;
 
 import Entities.Faecher;
 import Entities.Pruefungen;
+import Util.UtilColors;
 
 /*
  * TODO
@@ -138,6 +140,7 @@ public class PruefungenWindow extends JFrame {
   public JLabel getLabelFach() {
     if (labelFach == null) {
       labelFach = new JLabel("Fach");
+      labelFach.setForeground(Color.WHITE);
     }
     return labelFach;
   }
@@ -152,6 +155,7 @@ public class PruefungenWindow extends JFrame {
   public JLabel getLabelBezeichnung() {
     if (labelBezeichnung == null) {
       labelBezeichnung = new JLabel("Bezeichnung");
+      labelBezeichnung.setForeground(Color.WHITE);
     }
     return labelBezeichnung;
   }
@@ -167,6 +171,7 @@ public class PruefungenWindow extends JFrame {
   public JLabel getLabelDatum() {
     if (labelDatum == null) {
       labelDatum = new JLabel("Datum");
+      labelDatum.setForeground(Color.WHITE);
     }
     return labelDatum;
   }
@@ -181,6 +186,7 @@ public class PruefungenWindow extends JFrame {
   public JLabel getLabelNote() {
     if (labelNote == null) {
       labelNote = new JLabel("Note");
+      labelNote.setForeground(Color.WHITE);
     }
     return labelNote;
   }
@@ -196,6 +202,7 @@ public class PruefungenWindow extends JFrame {
   public JPanel getPanel() {
     if (panel == null) {
       panel = new JPanel();
+      panel.setBackground(UtilColors.getPanelColor());
       panel.add(getButtonSpeichern());
       panel.add(getButtonAbbrechen());
     }
@@ -205,6 +212,7 @@ public class PruefungenWindow extends JFrame {
   public JButton getButtonSpeichern() {
     if (buttonSpeichern == null) {
       buttonSpeichern = new JButton("Speichern");
+      buttonSpeichern.setBackground(UtilColors.getButtonColor());
 
       buttonSpeichern.addActionListener(new ActionListener() {
 
@@ -243,6 +251,7 @@ public class PruefungenWindow extends JFrame {
   public JButton getButtonAbbrechen() {
     if (buttonAbbrechen == null) {
       buttonAbbrechen = new JButton("Abbrechen");
+      buttonAbbrechen.setBackground(UtilColors.getButtonColor());
 
       buttonAbbrechen.addActionListener(new ActionListener() {
 
@@ -320,6 +329,7 @@ public class PruefungenWindow extends JFrame {
   public JButton getButtonNeuesfach() {
     if (buttonNeuesfach == null) {
       buttonNeuesfach = new JButton("Neues Fach");
+      buttonNeuesfach.setBackground(UtilColors.getButtonColor());
 
       buttonNeuesfach.addActionListener(new ActionListener() {
 
@@ -330,6 +340,7 @@ public class PruefungenWindow extends JFrame {
           try {
             FachWindow fachWindow = new FachWindow(PruefungenWindow.this);
             fachWindow.setBounds(getLocation().x + getSize().width, getLocation().y, 300, 400);
+            fachWindow.getContentPane().setBackground(UtilColors.getWindowColor());
             fachWindow.setVisible(true);
             refreshComboBoxFaecher();
           } catch (SQLException e1) {
