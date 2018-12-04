@@ -1367,4 +1367,8 @@ public class MainWindow extends JFrame {
       }
     });
   }
+
+  private void uhrzeit() {
+
+  }
 }
